@@ -10,7 +10,7 @@ class WeatherService{
 
   Future<Weather> getWeather(double lat, double lan) async {
     final response = await http.get(Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?lat=23.757249623460947&lon=90.361299918231&units=metric&appid=4d199c53c9a221f93f6f20d2b85d04c4'));
+        'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lan&units=metric&appid=4d199c53c9a221f93f6f20d2b85d04c4'));
 
     print("code: "+ response.statusCode.toString());
     if(response.statusCode == 200){
@@ -24,7 +24,7 @@ class WeatherService{
 
   Future<List<Forecast>> getForeCast(double lat, double lan) async {
     final response = await http.get(Uri.parse(
-        'https://api.openweathermap.org/data/2.5/forecast?lat=23.757249623460947&lon=90.361299918231&units=metric&appid=4d199c53c9a221f93f6f20d2b85d04c4'));
+        'https://api.openweathermap.org/data/2.5/forecast?lat=$lat&lon=$lan&units=metric&appid=4d199c53c9a221f93f6f20d2b85d04c4'));
 
     if(response.statusCode == 200){
       final data = json.decode(response.body);

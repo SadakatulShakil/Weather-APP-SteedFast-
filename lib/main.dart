@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => WeatherController()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Weather App',
         theme: ThemeData(
           primarySwatch: Colors.cyan,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/models/weather_model.dart';
 import 'package:weather_app/services/location_service.dart';
 import 'package:weather_app/services/weather_service.dart';
+import 'package:geocoding/geocoding.dart';
 
 class WeatherController extends ChangeNotifier{
   final WeatherService _weatherService = WeatherService();
@@ -11,12 +12,14 @@ class WeatherController extends ChangeNotifier{
   List<Forecast> _forecast = [];
   bool _isLoading = false;
   String _error = '';
+  String _cityName = '';
   bool _isCelsius = true;
 
   Weather? get  currentWeather => _currentWeather;
   List<Forecast> get forecast => _forecast;
   bool get isLoading => _isLoading;
   String get error => _error;
+  String get cityName => _cityName;
   bool get isCelsius => _isCelsius;
 
   Future<void> fetchWeatherData() async {
@@ -38,6 +41,23 @@ class WeatherController extends ChangeNotifier{
     }finally{
       _isLoading = false;
       notifyListeners();
+    }
+  }
+
+  Future<void> fetchCityData()async {
+    _isLoading = true;
+    _error = '';
+    notifyListeners();
+
+    try {
+      final position = await _locationService.getCurrentLocation();
+      List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+      Placemark place = placemarks[0];
+      final nameOfCity = place.locality ?? "Unknown";
+
+      _cityName = nameOfCity;
+    } catch (e) {
+      _error = 'Failed to get City';
     }
   }
 

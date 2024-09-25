@@ -43,6 +43,7 @@ dependencies:
   geolocator: ^10.1.0
   google_fonts: 4.0.4
   http: ^0.13.3
+  geocoding: ^2.0.4
   intl: ^0.17.0  # Use the latest version
 
 dev_dependencies:
