@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -12,18 +10,21 @@ class WeatherService{
 
   Future<Weather> getWeather(double lat, double lan) async {
     final response = await http.get(Uri.parse(
-        '$_baseUrl/weather?lat=$lat&lan=$lan&units=mectric&appid=$_apiKey'));
+        'https://api.openweathermap.org/data/2.5/weather?lat=23.757249623460947&lon=90.361299918231&units=metric&appid=4d199c53c9a221f93f6f20d2b85d04c4'));
 
+    print("code: "+ response.statusCode.toString());
     if(response.statusCode == 200){
+      print("weather get");
       return Weather.fromJson(json.decode(response.body));
     }else{
+      print("weather not get");
       throw Exception('Failed to load weather data');
     }
   }
 
   Future<List<Forecast>> getForeCast(double lat, double lan) async {
     final response = await http.get(Uri.parse(
-        '$_baseUrl/forecast?lat=$lat&lan=$lan&units=mectric&appid=$_apiKey'));
+        'https://api.openweathermap.org/data/2.5/forecast?lat=23.757249623460947&lon=90.361299918231&units=metric&appid=4d199c53c9a221f93f6f20d2b85d04c4'));
 
     if(response.statusCode == 200){
       final data = json.decode(response.body);
