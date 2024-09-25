@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app/controllers/weather_controller.dart';
 import 'package:weather_app/views/home_screen.dart';
 
 void main() {
@@ -13,7 +14,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [],
+      providers: [
+        ChangeNotifierProvider(create: (_) => WeatherController()),
+      ],
       child: MaterialApp(
         title: 'Weather App',
         theme: ThemeData(
