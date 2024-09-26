@@ -10,7 +10,7 @@ class WeatherService{
 
   Future<Weather> getWeather(double lat, double lan) async {
     final response = await http.get(Uri.parse(
-        '$_baseUrl/onecall?lat=$lat&lon=$lan&units=metric&exclude=minute,alerts&appid=$_apiKey'));
+        '$_baseUrl/weather?lat=$lat&lon=$lan&units=metric&exclude=minutely,alerts&appid=$_apiKey'));
 
     print("code: "+ response.statusCode.toString());
     if(response.statusCode == 200){

@@ -63,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen>{
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         LocationWidget(cityName: weatherController.cityName),
+                        const SizedBox(height: 15,),
                         CurrentWeatherWidget(
                           weather: weatherController.currentWeather!
                         ),
@@ -74,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen>{
                           '3-Day Forecast',
                             style: TextStyle(color: Colors.white70, fontSize: 25),
                         ),
-                        ForecastWidget(forecast: weatherController.hourlyForecast),
+                        ForecastWidget(forecast: weatherController.forecast),
                         const SizedBox(height: 20,),
                         SunriseSunsetWidget(
                           sunrise: weatherController.currentWeather!.sunrise,

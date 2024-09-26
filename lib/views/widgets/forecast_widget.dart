@@ -5,42 +5,56 @@ import 'package:intl/intl.dart';
 import '../../models/weather_model.dart';
 
 class ForecastWidget extends StatelessWidget{
-  final List<HourlyForecast> forecast;
+  final List<Forecast> forecast;
 
   const ForecastWidget({Key? key, required this.forecast}) : super(key: key);
 
+  String _getWeatherIcon(String weatherMode){
+    if(weatherMode == 'Rain') return 'assets/images/rain.png';
+    if(weatherMode == 'Thunderstorm') return 'assets/images/thunder.png';
+    if(weatherMode == 'Clouds') return 'assets/images/prety_cloudy.png';
+    if(weatherMode == 'Snow') return 'assets/images/winter.png';
+    return 'assets/images/clear_sky.png';
+  }
+
   @override
   Widget build(BuildContext context){
-    final weatherController = Provider.of<WeatherController>(context);
-    final unit = weatherController.isCelsius ? '°C' : '°F';
     return Container(
-      height: 100,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-          itemCount: forecast.length,
-          itemBuilder: (context, index){
-          HourlyForecast hourly = forecast[index];
-          return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Column(
-                children: [
-                  Text('${hourly.time.hour}:00',
-                  style: TextStyle(color: Colors.white)
-                  ),
-                  Image.network(
-                    'https://openweathermap.org/imag/wn/${hourly.iconCode}@2x.png',
-                    width: 30,
-                    height: 30,
-                  ),
-                  Text('${weatherController.convertTemperature(hourly.temperature).round()}$unit',
-                      style: TextStyle(color: Colors.white)
-                  ),
-                ],
-              ),
-          );
-          }
-      )
+      margin: const EdgeInsets.all(16),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ...forecast.map((day) => _buildForecastDay(context, day)).toList(),
+          ],
+        ),
+      ),
     );
   }
-  
+
+  Widget _buildForecastDay(BuildContext context, Forecast day){
+    final weatherController = Provider.of<WeatherController>(context);
+    final temperature = weatherController.convertTemperature(day.temperature);
+    final unit = weatherController.isCelsius ? '°C' : '°F';
+
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.2),
+          borderRadius: BorderRadius.circular(15)
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(5),
+        child: Column(
+          children: [
+            Text(DateFormat('E, MMM d').format(day.date),
+                style: TextStyle(color: Colors.white)),
+            Image.asset(_getWeatherIcon(day.main)),
+            Text('${temperature.toStringAsFixed(1)}$unit',
+                style: TextStyle(color: Colors.white)),
+          ],
+        ),
+      ),
+    );
+  }
 }
