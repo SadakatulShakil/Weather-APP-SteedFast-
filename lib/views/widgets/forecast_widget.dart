@@ -50,6 +50,7 @@ class ForecastWidget extends StatelessWidget{
             Text(DateFormat('E, MMM d').format(day.date),
                 style: TextStyle(color: Colors.white)),
             Image.asset(_getWeatherIcon(day.main)),
+            SizedBox(height: 10,),
             Text('${temperature.toStringAsFixed(1)}$unit',
                 style: TextStyle(color: Colors.white)),
           ],

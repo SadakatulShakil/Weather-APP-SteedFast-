@@ -44,7 +44,8 @@ dependencies:
   google_fonts: 4.0.4
   http: ^0.13.3
   geocoding: ^2.0.4
-  intl: ^0.17.0  # Use the latest version
+  intl: ^0.17.0
+  connectivity_plus: ^2.3.0
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/models/weather_model.dart';
 import 'package:weather_app/services/location_service.dart';
@@ -14,6 +15,7 @@ class WeatherController extends ChangeNotifier{
   String _error = '';
   String _cityName = '';
   bool _isCelsius = true;
+  bool _isOffline = false;
   // List<HourlyForecast> _hourlyForecast = [];
   // List<HourlyForecast> get hourlyForecast => _hourlyForecast;
 
@@ -23,6 +25,7 @@ class WeatherController extends ChangeNotifier{
   String get error => _error;
   String get cityName => _cityName;
   bool get isCelsius => _isCelsius;
+  bool get isOffline => _isOffline;
 
   Future<void> fetchWeatherData() async {
     _isLoading = true;
@@ -30,6 +33,9 @@ class WeatherController extends ChangeNotifier{
     notifyListeners();
 
     try{
+      final connectivityResult = await Connectivity().checkConnectivity();
+      _isOffline = connectivityResult == ConnectivityResult.none;
+
       final position = await _locationService.getCurrentLocation();
       final weatherData = await _weatherService.getWeather(position.latitude, position.longitude);
       final foreCastData = await _weatherService.getForeCast(position.latitude, position.longitude);
@@ -38,6 +44,7 @@ class WeatherController extends ChangeNotifier{
       //_hourlyForecast = weatherData.hourlyForecast;
       _forecast = foreCastData;
 
+      await fetchCityData();
     }catch(e){
       _error = 'Failed to fetch weather dat: ${e.toString()}';
 
@@ -48,10 +55,6 @@ class WeatherController extends ChangeNotifier{
   }
 
   Future<void> fetchCityData()async {
-    _isLoading = true;
-    _error = '';
-    notifyListeners();
-
     try {
       final position = await _locationService.getCurrentLocation();
       List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);

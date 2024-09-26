@@ -28,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen>{
   }
   Future<void> _refreshWeatherData() async {
     await Provider.of<WeatherController>(context, listen: false).fetchWeatherData();
-    await Provider.of<WeatherController>(context, listen: false).fetchCityData();
   }
 
   @override
