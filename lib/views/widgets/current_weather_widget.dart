@@ -46,7 +46,7 @@ class CurrentWeatherWidget extends StatelessWidget{
                   children: [
                     Icon(Icons.air_outlined, color: Colors.white70, size: 20,),
                     SizedBox(width: 5,),
-                    Text('${weather.windSpeed} m/s', style: TextStyle(color: Colors.white70),),
+                    Text('${weather.windSpeed == 0? '1.0':weather.windSpeed} m/s', style: TextStyle(color: Colors.white70),),
                   ],
                 ),
                 SizedBox(height: 5,),
@@ -56,7 +56,7 @@ class CurrentWeatherWidget extends StatelessWidget{
                   children: [
                     Icon(Icons.water_drop, color: Colors.white70, size: 20,),
                     SizedBox(width: 5,),
-                    Text('${weather.windSpeed} g/m3', style: TextStyle(color: Colors.white70),),
+                    Text('${weather.humidity} g/m3', style: TextStyle(color: Colors.white70),),
                   ],
                 ),
                 SizedBox(height: 5,),
@@ -66,7 +66,7 @@ class CurrentWeatherWidget extends StatelessWidget{
                   children: [
                     Icon(Icons.compress, color: Colors.white70, size: 20,),
                     SizedBox(width: 5,),
-                    Text('${weather.windSpeed} hPa', style: TextStyle(color: Colors.white70),),
+                    Text('${weather.pressure.round()} hPa', style: TextStyle(color: Colors.white70),),
                   ],
                 ),
                 SizedBox(height: 5,),
@@ -76,7 +76,7 @@ class CurrentWeatherWidget extends StatelessWidget{
                   children: [
                     Icon(Icons.visibility, color: Colors.white70, size: 20,),
                     SizedBox(width: 5,),
-                    Text('${weather.windSpeed} m', style: TextStyle(color: Colors.white70),),
+                    Text('${weather.visibility.round()} m', style: TextStyle(color: Colors.white70),),
                   ],
                 )
               ],

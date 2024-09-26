@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen>{
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Colors.blue[300]!, Colors.blue[700]!]
+                      colors: [Color(0xff97ABFF), Color(0xff193b9a)]
                     )
                   ),
                   child: SafeArea(

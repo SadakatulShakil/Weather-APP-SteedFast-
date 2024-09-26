@@ -25,7 +25,7 @@ class WeatherService{
       final response = await http.get(Uri.parse(
           '$_baseUrl/weather?lat=$lat&lon=$lan&units=metric&exclude=minutely,alerts&appid=$_apiKey'));
 
-      print("code: "+ response.statusCode.toString());
+      print("code: "+ response.body.toString());
       if(response.statusCode == 200){
         final weather = Weather.fromJson(json.decode(response.body));
 
