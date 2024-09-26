@@ -10,6 +10,11 @@ A Flutter weather app that fetches weather data from a public API and displays i
 - Toggle between Celsius and Fahrenheit
 - Persist weather data for offline viewing
 
+#Screenshots
+
+![location_permission](https://github.com/user-attachments/assets/307399b0-c4ac-42b6-b356-9c14461043a0)
+![home_screen](https://github.com/user-attachments/assets/253131fc-978c-4fc1-aa3c-f7a2dce49afb)
+
 # Setup
 
 1. Clone the repository:
