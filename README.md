@@ -2,6 +2,13 @@
 
 A Flutter weather app that fetches weather data from a public API and displays it in a user-friendly interface.
 
+#Install Process
+
+- First download the apk file from '/apk_file' folder
+- If install from unknown source not enable than enable it from settings
+- Than open it with package installer
+- than install it
+
 # Features
 
 - Display current weather conditions (temperature, weather description, wind speed, humidity, etc.)
