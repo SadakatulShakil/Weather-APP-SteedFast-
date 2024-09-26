@@ -11,6 +11,7 @@ class Weather {
   final int sunrise;
   final int sunset;
   final int uvIndex;
+  final List<HourlyForecast> hourlyForecast;
 
   Weather({
     required this.temperature,
@@ -25,6 +26,7 @@ class Weather {
     required this.sunrise,
     required this.sunset,
     required this.uvIndex,
+    required this.hourlyForecast,
   });
 
   factory Weather.fromJson(Map<String, dynamic> json) {
@@ -41,9 +43,33 @@ class Weather {
       sunrise: json['sys']['sunrise'],
       sunset: json['sys']['sunset'],
       uvIndex: json['sys']['type'],
+      hourlyForecast: (json['hourly'] as List<dynamic>)
+        .map((hourly) => HourlyForecast.fromJson(hourly))
+        .toList(),
     );
   }
 }
+
+class HourlyForecast{
+  final DateTime time;
+  final double temperature;
+  final String iconCode;
+
+  HourlyForecast({
+   required this.time,
+   required this.temperature,
+   required this.iconCode,
+  });
+
+  factory HourlyForecast.fromJson(Map<String, dynamic> json){
+    return HourlyForecast(
+        time: DateTime.fromMicrosecondsSinceEpoch(json['dt']*1000),
+        temperature: json['temp'].toDouble(),
+        iconCode: json['weather'][0]['icon'],
+    );
+  }
+}
+
 
 class Forecast {
   final DateTime date;

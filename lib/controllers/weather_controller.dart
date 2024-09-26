@@ -14,6 +14,8 @@ class WeatherController extends ChangeNotifier{
   String _error = '';
   String _cityName = '';
   bool _isCelsius = true;
+  List<HourlyForecast> _hourlyForecast = [];
+  List<HourlyForecast> get hourlyForecast => _hourlyForecast;
 
   Weather? get  currentWeather => _currentWeather;
   List<Forecast> get forecast => _forecast;
@@ -30,10 +32,11 @@ class WeatherController extends ChangeNotifier{
     try{
       final position = await _locationService.getCurrentLocation();
       final weatherData = await _weatherService.getWeather(position.latitude, position.longitude);
-      final foreCastData = await _weatherService.getForeCast(position.latitude, position.longitude);
+      //final foreCastData = await _weatherService.getForeCast(position.latitude, position.longitude);
 
       _currentWeather = weatherData;
-      _forecast = foreCastData;
+      _hourlyForecast = weatherData.hourlyForecast;
+      //_forecast = foreCastData;
 
     }catch(e){
       _error = 'Failed to fetch weather dat: ${e.toString()}';

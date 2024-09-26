@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen>{
                           '3-Day Forecast',
                             style: TextStyle(color: Colors.white70, fontSize: 25),
                         ),
-                        ForecastWidget(forecast: weatherController.forecast),
+                        ForecastWidget(forecast: weatherController.hourlyForecast),
                         const SizedBox(height: 20,),
                         SunriseSunsetWidget(
                           sunrise: weatherController.currentWeather!.sunrise,
