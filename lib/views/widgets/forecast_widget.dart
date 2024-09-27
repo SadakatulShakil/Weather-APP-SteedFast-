@@ -20,7 +20,7 @@ class ForecastWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-      margin: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(10),
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Row(
@@ -49,7 +49,7 @@ class ForecastWidget extends StatelessWidget{
           children: [
             Text(DateFormat('E, MMM d').format(day.date),
                 style: TextStyle(color: Colors.white)),
-            Image.asset(_getWeatherIcon(day.main)),
+            Image.asset(_getWeatherIcon(day.main), width: 40, height: 40,),
             SizedBox(height: 10,),
             Text('${temperature.toStringAsFixed(1)}$unit',
                 style: TextStyle(color: Colors.white)),
